@@ -2,10 +2,12 @@ const mysql = require('mysql');
 
 // MySQL connection configuration
 const dbOptions = {
-    host: "MSI.local",
-    user: "dbadm",
-    password: "P@ssw0rd",
-    database: "iLabel"
+    host: process.env.DB_HOST,       // use the environment variable
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: 3306,                       // default MySQL port
+    multipleStatements: true
 };
 
 // Create a connection pool
