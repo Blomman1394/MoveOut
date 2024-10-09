@@ -2,7 +2,7 @@
  * A sample Express server with static resources.
  */
 "use strict";
-
+const cors = require('cors');
 const port = 3306;
 const path = require("path");
 const express = require("express");
@@ -14,6 +14,12 @@ const middleware = require("./middleware/index.js");
 const session = require('express-session');
 
 
+const corsOptions = {
+    origin: 'https://cabhholding.se', // Allow requests from your domain
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+};
+app.use(cors(corsOptions));
 // Set the view engine and views directory
 app.set("view engine", "ejs");
 app.set('views', './views');
