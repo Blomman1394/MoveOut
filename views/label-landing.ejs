@@ -1,0 +1,248 @@
+<%- include("header", { title: title }); %>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Upload with Dropzone</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" />
+
+<div id="label-display">
+    <div class="label-content">
+        <!-- Background image as the label background -->
+        <img class="label-background" src="/img/<%=labelDetails.background%>" alt="label-background" />
+
+        <!-- User Input Text -->
+        <div class="label-text">
+            <h2><%= labelDetails.label_name %></h2>
+        </div>
+
+        <!-- QR Code Display -->
+        <div class="label-qr">
+            <img class="qr-code" src="<%= qrCodeUrl %>" alt="QR Code" />
+        </div>
+
+        <!-- Icons such as Fragile, Heavy -->
+        <div class="label-icon">
+            <% 
+            let iconsArray = labelDetails.icons 
+              ? labelDetails.icons.split(',').map(icon => icon.trim().replace(/[^a-zA-Z0-9]/g, '')) 
+              : []; 
+          %>
+          <% iconsArray.forEach(function(icon) { %>
+              <img class="label-icon" src="/img/<%= icon %>.jpg" alt="<%= icon %>" />
+          <% }); %>
+        </div>
+    </div>
+</div>
+
+<button class="print-button" onclick="printLabel()">Print Label</button>
+
+<h2>Upload Files</h2>
+<form action="/label/<%= userId %>/<%= labelId %>/upload" class="dropzone" id="myDropzone"  method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="userId" value="<%= userId %>"> <!-- Replace with dynamic user ID -->
+    <input type="hidden" name="labelId" value="<%= labelId %>"> <!-- Replace with dynamic label ID -->
+</form>
+
+<h3>Uploaded Content</h3>
+<div id="uploaded-content"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+
+
+</form>
+
+
+<%- include("footer"); %>
+
+<script>
+
+
+Dropzone.options.myDropzone = {
+    paramName: "files", // The name that will be used to transfer the file
+    maxFilesize: 20, // MB
+    acceptedFiles: "image/*,application/pdf,audio/*, text/*", // Adjust the accepted file types as needed
+    init: function() {
+        this.on("success", function(file, response) {
+            console.log(response); // Handle the response from the server
+        });
+    }
+};
+
+
+const userId = "<%= userId %>";
+  const labelId = "<%= labelId %>";
+
+  // Function to display uploaded content
+  async function displayUploadedContent() {
+    const uploadedContentDiv = document.getElementById("uploaded-content");
+    
+    try {
+      // Fetch the list of uploaded files
+      const response = await fetch(`/uploads/${userId}/${labelId}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok: ' + response.statusText);
+      }
+      const files = await response.json();
+
+      // Create a link for each file that exists
+      files.forEach(file => {
+        const fileElement = document.createElement("div");
+        const fileLink = document.createElement("a");
+        
+        const filePath = `/uploads/${file}`; // Adjust the path if needed
+        fileLink.href = filePath;
+        fileLink.innerText = file;
+        fileLink.target = "_blank"; // Open link in new tab
+        
+        // Append the link to the div
+        fileElement.appendChild(fileLink);
+        uploadedContentDiv.appendChild(fileElement);
+      });
+    } catch (error) {
+      console.error('Error fetching uploaded files:', error);
+      uploadedContentDiv.innerText = 'Error fetching uploaded files: ' + error.message;
+    }
+  }
+
+
+
+  // Call the function to display content when the page loads
+  window.onload = displayUploadedContent;
+
+function printLabel() {
+    // Get the content of the label-content
+    const labelContent = document.querySelector('.label-content').innerHTML;
+
+    // Create a new window
+    const printWindow = window.open('', '', 'height=500,width=800');
+
+    // Write the content to the new window
+    printWindow.document.write('<html><head><title>Print Label</title>');
+    printWindow.document.write('<link rel="stylesheet" href="/public/css/style.css">'); // Link to your CSS file
+    printWindow.document.write('</head><body>');
+    
+    // Add the label content
+    printWindow.document.write('<div class="label-content">' + labelContent + '</div>'); 
+
+    // Add print-specific styles
+    printWindow.document.write('<style>');
+    printWindow.document.write(`
+        @media print {
+#label-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-content {
+  display: grid;
+  position: relative;
+  width: 600px;
+  height: 400px;
+  grid-template-columns: 1fr; /* Single column grid */
+  grid-template-rows: 1fr; /* Single row grid */
+}
+
+.label-background {
+  grid-area: 1 / 1 / 2 / 2; /* Occupy the entire grid */
+  width: 100%;
+  height: 100%;
+}
+.label-content {
+  width: 600px;
+  height: 400px;
+  background-image: url('/img/Label.jpg');
+  background-size: cover;
+  position: relative;
+}
+
+
+
+.label-text {
+  position: absolute;
+  grid-area: 1 / 1 / 2 / 2; /* Same area as background */
+  justify-self: center;
+  align-self: center;
+  font-size: 40px;
+  color: #64312c;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+.label-qr {
+  position: absolute;
+  z-index:2; 
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: center;
+  align-self: end;
+  transform: translateY(-55px);
+  width: 100px;
+  height: 100px;
+}
+
+.label-icon {
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: start;
+  align-self: end;
+  transform: translateY(-45px);
+  width: 40px;
+  height: 40px;
+}
+        }
+    `);
+    printWindow.document.write('</style>');
+
+    // Close the document to finish writing and trigger print
+    printWindow.document.close();
+    printWindow.focus();
+
+    // Trigger the print dialog
+    printWindow.print();
+
+    // Optionally close the print window after printing
+    printWindow.onafterprint = function () {
+        printWindow.close();
+    };
+}
+
+function previewFiles() {
+        const preview = document.getElementById('preview');
+        const files = document.getElementById('file-upload').files;
+        
+        // Clear the preview area
+        preview.innerHTML = '';
+
+        if (files) {
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = (event) => {
+                    let fileElement;
+                    const fileType = file.type.split('/')[0];
+
+                    // Create the appropriate preview element based on file type
+                    if (fileType === 'image') {
+                        fileElement = document.createElement('img');
+                        fileElement.src = event.target.result;
+                        fileElement.style.maxWidth = '150px';
+                        fileElement.style.margin = '10px';
+                    } else if (fileType === 'audio') {
+                        fileElement = document.createElement('audio');
+                        fileElement.controls = true;
+                        fileElement.src = event.target.result;
+                    } else if (fileType === 'text') {
+                        fileElement = document.createElement('textarea');
+                        fileElement.innerHTML = event.target.result;
+                        fileElement.rows = 5;
+                        fileElement.cols = 50;
+                    }
+
+                    // Append the element to the preview area
+                    preview.appendChild(fileElement);
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+    }
+
+</script>
+

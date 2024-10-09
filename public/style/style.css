@@ -1,0 +1,399 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #c9ac76;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  display: flex;
+  border-top: 1px solid #cfcfcf; 
+  width: 100%;
+  height: 50px; 
+  background: #c9ac76;
+  color: white;
+  position: absolute;
+  bottom: 0;
+
+
+}
+
+.footer-section {
+  flex: 1; 
+  padding: 20px;
+  box-sizing: border-box;
+  border-right: 1px solid #ffffff;
+}
+
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #c9ac76;
+  color: white;
+}
+
+.hero-section {
+  text-align: center;
+  background-color: #c9ac76; /* Main brand color */
+  color: white;
+  padding: 50px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+  font-size: 36px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  margin-top: 10px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.content-section {
+  margin-top: 40px;
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content-section p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.action-button {
+  text-decoration: none;
+  background-color: #977f52;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #c9ac76;
+}
+
+@media (max-width: 768px) {
+  .action-buttons {
+      flex-direction: column;
+  }
+
+  .action-button {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+
+
+
+/*................................LABEL PAGE.............................................*/
+
+#label-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-content {
+  display: grid;
+  position: relative;
+  width: 600px;
+  height: 400px;
+  grid-template-columns: 1fr; /* Single column grid */
+  grid-template-rows: 1fr; /* Single row grid */
+}
+
+.label-background {
+  grid-area: 1 / 1 / 2 / 2; /* Occupy the entire grid */
+  width: 100%;
+  height: 100%;
+}
+.label-content {
+  width: 600px;
+  height: 400px;
+  background-image: url('/img/Label.jpg');
+  background-size: cover;
+  position: relative;
+}
+
+
+
+.label-text {
+  position: absolute;
+  grid-area: 1 / 1 / 2 / 2; /* Same area as background */
+  justify-self: center;
+  align-self: center;
+  font-size: 40px;
+  color: #64312c;
+  font-family: 'Times New Roman', sans-serif;
+  font-weight: bold;
+}
+
+.label-qr {
+  position: absolute;
+  z-index:2; 
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: center;
+  align-self: end;
+  transform: translateY(-55px);
+  width: 100px;
+  height: 100px;
+}
+
+.label-icon {
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: start;
+  align-self: end;
+  transform: translateY(-45px);
+  width: 40px;
+  height: 40px;
+}
+
+
+
+@media print {
+  body {
+      margin: 0; /* Remove default margin */
+  }
+}
+
+/*................................Create Label........................................*/
+.create-label-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.create-label-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form input fields */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #977f52;
+  outline: none;
+}
+
+/* Style for multiple selection instructions */
+form p {
+  font-size: 0.875rem;
+  color: #888;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* Button styling */
+button[type="submit"] {
+  background-color: #977f52;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .create-label-container {
+      padding: 15px;
+  }
+  
+  button[type="submit"] {
+      width: 100%;
+  }
+}
+
+
+/*.................................Login............................*/
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-container h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.login-container input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #977f52;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-container input[type="submit"]:hover {
+  background-color: #977f52;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+      width: 90%;
+  }
+}
+
+
+/*................................DROPZONE..................................*/
+.dropzone {
+  border: 2px dashed #0087F7;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  margin: 20px;
+}
+#uploaded-content img {
+  max-width: 150px;
+  margin: 10px;
+}
+
+
+/*Admin*/
+.admin-dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-dashboard-container h2 {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.delete-button, .edit-button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #4CAF50;
+}

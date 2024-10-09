@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/favicon.ico">
+    <script src="https://use.fontawesome.com/0aee473986.js"></script>
+
+</head>
+<body>
+
+<header>
+    <nav style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="/index">Home</a>
+        <div style="margin-left: auto;"> <!-- Push the nav items to the right -->
+            <% if (!user) { %> <!-- Check if the user is not logged in -->
+                <a href="/register">Create an account</a>
+                <a href="/login" class="login-button">Log In</a> <!-- Log In button for non-logged-in users -->
+
+            <% } else { %> <!-- User is logged in -->
+                
+                <a href="/profile" class="profile">Profile</a>
+                <% if (user.is_admin) { %> <!-- Check if the user is an admin -->
+                    <a href="/admin-dashboard" class="admin-dashboard-button">Admin Dashboard</a> <!-- Admin dashboard link -->
+                <% } %> 
+                <form action="/logout" method="POST" style="margin: 0; display: inline;">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            <% } %>
+        </div>
+    </nav>
+</header>
+
+
+
+

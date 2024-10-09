@@ -1,0 +1,27 @@
+<%- include("header", { title: "My Labels" }); %>
+
+<div class="container">
+    <h1>My Labels</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Label Name</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% labels.forEach(label => { %>
+                <tr>
+                    <td><%= label.label_name %></td>
+                    <td><%= new Date(label.created_at).toLocaleDateString() %></td>
+                    <td>
+                        <a href="/label/<%= userId %>/<%= label.id %>" class="action-button">View Label</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include("footer"); %>

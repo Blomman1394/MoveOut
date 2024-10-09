@@ -1,0 +1,79 @@
+<%- include("header", { title: "Admin Dashboard" }); %>
+
+<div class="admin-dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Customers Table -->
+    <h2>Customers</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Verified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% customers.forEach(function(customer) { %>
+                <tr>
+                    <td><%= customer.id %></td>
+                    <td><%= customer.email %></td>
+                    <td><%= customer.is_admin ? 'Yes' : 'No' %></td>
+                    <td><%= customer.verified ? 'Yes' : 'No' %></td>
+                    <td>
+                        <form action="/delete-customer/<%= customer.id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                        <form action="/edit-customer/<%= customer.id %>" method="POST" style="display:inline;">
+                            <input type="text" name="email" value="<%= customer.email %>" required />
+                        
+                            <!-- Hidden field for is_admin -->
+                            
+                            <label>Admin: <input type="checkbox" name="is_admin" value="true" <%= customer.is_admin ? 'checked' : '' %> /></label>
+                        
+                            <!-- Hidden field for verified -->
+                           
+                            <label>Verified: <input type="checkbox" name="verified" value="true" <%= customer.verified ? 'checked' : '' %> /></label>
+                        
+                            <button type="submit" class="edit-button">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <!-- Labels Table -->
+    <h2>Labels</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% labels.forEach(function(label) { %>
+                <tr>
+                    <td><%= label.customer_id %></td>
+                    <td><%= label.id %></td>
+                    <td><%= label.label_name %></td>
+                    <td>
+                        <form action="/delete-label/<%= label.id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<h2>Send Marketing mail</h2>
+<form action="/send-marketingmail" method="POST" style= "display: inline;"><button type="submit" class="send-marketingmail">Send Marketing Mail</button></form>
+
+<%- include("footer"); %>

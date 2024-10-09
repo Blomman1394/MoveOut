@@ -1,0 +1,24 @@
+<%- include("header", { title: title }); %>
+
+<div class="container">
+  <div class="hero-section">
+    <h1 class="hero-title">Move Out</h1>
+    <p class="hero-subtitle">Your trusted partner in professional box label solutions</p>
+  </div>
+
+  <div class="content-section">
+    <p>What would you like to do?</p>
+
+    <div class="action-buttons">
+      <% if (user) { %> <!-- Check if user is logged in -->
+        <a href="/labels/<%=user.id%>" class="action-button">My Labels</a>
+        <a href="/create-label" class="action-button">Create Label</a>
+      <% } else { %> <!-- If not logged in -->
+        <a href="/login" class="action-button">Log In</a>
+        <a href="/register" class="action-button">Create Account</a>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include("footer"); %>

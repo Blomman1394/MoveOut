@@ -1,0 +1,37 @@
+<%- include("header", { title: "Create Label" }); %>
+
+<div class="create-label-container">
+    <h1>Create Your Label</h1>
+
+    <form action="/create-label" method="POST" id="label-form">
+        <div class="form-group">
+            <label for="labelName">Label Name:</label>
+            <input type="text" id="labelName" name="labelName" required>
+        </div>
+
+       - <div class="form-group">
+            <label for="background">Choose Background:</label>
+            <select id="background" name="background" required>
+                <option value="Label.jpg">Background 1</option>
+                <option value="Label2.png">Background 2</option>
+                <option value="Label3.png">Background 3</option>
+                Add more backgrounds as needed 
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="icons">Choose Icons:</label>
+            <select id="icons" name="icons" multiple required>
+                <option value="fragile">Fragile</option>
+                <option value="flamable">Flamable</option>
+                <option value="heavy">Heavy</option>
+                <!-- Add more icons as needed -->
+            </select>
+            <p>Hold down the Ctrl (Windows) or Command (Mac) button to select multiple options.</p>
+        </div>
+
+        <button type="submit">Create Label</button>
+    </form>
+</div>
+
+<%- include("footer"); %>

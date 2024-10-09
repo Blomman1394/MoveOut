@@ -1,0 +1,22 @@
+<%- include("header", { title: title }); %>
+    <div class="container">
+        <div class="account-box">
+            <h1>Create a New Account</h1>
+
+            <% if (typeof errorMessage !== 'undefined') { %>
+                <div class="error"><%= errorMessage %></div>
+            <% } %>
+
+            <form action="/register" method="POST">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required minlength="6">
+                
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+<%- include('footer') %> 

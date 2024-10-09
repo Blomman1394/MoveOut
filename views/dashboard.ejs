@@ -1,0 +1,15 @@
+<%- include("header", { title: "Dashboard", user: user }); %>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome to Your Dashboard</h1>
+        <p>Your email: <strong><%= user.email %></strong></p>
+    </div>
+    <div class="dashboard-content">
+        <button onclick="location.href='/labels/<%=user.id%>'">My Labels</button>
+        <button onclick="location.href='/create-label'">Create Label</button>
+    </div>
+</div>
+
+<%- include("footer"); %>
+
