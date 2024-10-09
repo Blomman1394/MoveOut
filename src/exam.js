@@ -2,7 +2,15 @@
 
 const express = require('express');
 const mysql = require("promise-mysql");
-const config = require("../db/exam.json");
+const config = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: 3306,   
+    multipleStatements: true
+};
+
 const bcrypt = require('bcrypt');
 const bcryptjs = require('bcryptjs');
 const crypto = require('crypto');
