@@ -3,7 +3,7 @@
  */
 "use strict";
 
-const port = process.env.DBWEBB_PORT || 1337;
+const port = 3306;
 const path = require("path");
 const express = require("express");
 const mysql = require('mysql');
