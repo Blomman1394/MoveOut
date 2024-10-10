@@ -10,7 +10,7 @@ const app = express();
 
 // Set the view engine and views directory
 app.set("view engine", "ejs");
-app.set('views', './views');
+app.set('views', path.join(__dirname, '../views'));
 
 // Middleware to log incoming requests
 app.use(middleware.logIncomingToConsole);
