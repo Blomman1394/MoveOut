@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Route definitions should come after session middleware
-app.use("/index", routeshop);
+app.use("/", routeshop);
 
 // Export the app as a module for Vercel to use
 module.exports = app;
