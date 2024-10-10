@@ -3,6 +3,6 @@
     "user":     "dbadm",
     "password": "P@ssw0rd",
     "database": "iLabel",
-    "port": 3306,
+    "port": 1337,
     "multipleStatements": true
 }
