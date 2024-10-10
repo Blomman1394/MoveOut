@@ -1,1 +1,8 @@
-
+{
+    "host": "your-database-host",
+    "user": "your-database-user",
+    "password": "your-database-password",
+    "database": "your-database-name",
+    "port": 3306,
+    "multipleStatements": true
+}
