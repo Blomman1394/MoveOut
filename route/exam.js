@@ -30,7 +30,7 @@ const upload = multer({ storage });
 
 module.exports = router;
 
-router.get("/index", (req, res) => {
+router.get("/", (req, res) => {
     const user = req.session.isLoggedIn ? {email: req.session.email, id: req.session.userId, is_admin: req.session.is_admin, is_admin: req.session.is_admin } : null; // Get user data from the session
 
     let data = {
