@@ -11,11 +11,11 @@ const app = express();
 // Set the view engine and views directory
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, '../views'));
-
+app.use(express.static(path.join(__dirname, '../public')));
 // Middleware to log incoming requests
 app.use(middleware.logIncomingToConsole);
-app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/uploads', express.static('uploads'));
+app.use('../images', express.static(path.join(__dirname, 'images')));
+app.use('../uploads', express.static('uploads'));
 
 // Session middleware should come before routes
 app.use(session({
