@@ -1,8 +1,8 @@
 {
-    "host": "your-database-host",
-    "user": "your-database-user",
-    "password": "your-database-password",
-    "database": "your-database-name",
+    "host":     "MSI.local",
+    "user":     "dbadm",
+    "password": "P@ssw0rd",
+    "database": "iLabel",
     "port": 3306,
     "multipleStatements": true
 }
