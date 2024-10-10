@@ -3,8 +3,8 @@
 const path = require("path");
 const express = require("express");
 const session = require('express-session');
-const middleware = require("../../middleware/index.js");
-const routeshop = require("../../route/exam.js");
+const middleware = require("../middleware/index.js");
+const routeshop = require("../route/exam.js");
 
 const app = express();
 
